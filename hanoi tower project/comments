@@ -1,0 +1,37 @@
+import tkinter
+from tkinter import *
+from PIL import ImageTk, Image
+from tkinter import font
+import time
+'''этот модуль содержит различные комментарии, которые могут выводиться в процессе игры, все функции принимают, как минимум, аргументы movescount (количество сделанных ходов) и root для возможности вывода комментария на основной интерфейс'''
+def moves_number(movescount, root):
+    '''эта функция принимает аргументы movescount, root и пишет на экране количество сделанных игроком ходов'''
+    moves = Label(root, text=f'{movescount} Moves', fg="black", font="Consolas 20", bg="#B4DD1E")
+    moves.place(relx=0.5, rely=0.12, anchor=CENTER)
+
+
+def congratulations(root, pack, movescount, time):
+    '''эта функция принимает стандартные для модуля аргументы, а также pack (это список, содержащий кнопки ходов из основного модуля) и time (это время потраченное игроком на завершение головоломки), программа выводит поздравление с указанием времени при успешном выполнении головоломки (за минимальное количество ходов) и более скромное поздравление с пожеланием, если ходов было больше минимального количества'''
+    if movescount==15:
+        congrats = Label(root, text=f'congrats!!!!\n{str(time)[:4]} secs', fg="black", font="Consolas 98", bg="#FFFFFF")
+
+    if movescount>15:
+        congrats = Label(root, text='congrats!\ncould`ve done better though', fg="black", font="Consolas 36", bg="#FFFFFF")
+
+    congrats.place(relx=0.5, rely=0.6, anchor=CENTER)
+
+    for i in pack:
+        i.destroy()
+
+
+def comment(movescount, root):
+    '''эта функция принимает стандартные для модуля аргументы. Выводит на экран комментарий, если игрок не укладывается в минимальное количество ходов'''
+    comment = Label(root, text='you`ve used more moves than you need\nmaybe, you should restart', fg="black", font="Consolas 14", bg="#B4DD1E")
+
+    if movescount>=15:
+        comment.place(relx=0.7, rely=0.2, anchor=CENTER)
+
+    if movescount<15:
+        comment.destroy()
+
+
